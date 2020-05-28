@@ -1,0 +1,113 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src chrome: blob:; img-src https:; object-src 'none'">
+    <link rel="localization" href="browser/branding/brandings.ftl">
+    <link rel="localization" href="branding/brand.ftl">
+    <!-- Temporary "en-US"-only l10n strings -->
+    <link rel="localization" href="preview/pioneer.ftl">
+    <link rel="stylesheet" href="Pioneer_files/common.css">
+    <link rel="stylesheet" href="Pioneer_files/toggle-button.css">
+    <link rel="stylesheet" href="Pioneer_files/pioneer.css">
+    <script src="Pioneer_files/pioneer.js"></script>
+    <link rel="icon" href="chrome://browser/skin/pioneer.svg">
+    <title data-l10n-id="pioneer">Pioneer</title>
+  </head>
+
+  <body>
+    <div id="report-content">
+      <button id="enrollment-button" class="" data-l10n-id="pioneer-unenrollment-button">Disable</button>
+
+      <h1 id="report-title" data-l10n-id="pioneer-title">About Pioneer</h1>
+      <div>
+        <p data-l10n-id="pioneer-summary">Pioneer is an experimental 
+feature that lets you donate your browsing data for public interest 
+scientific research. Every study in Pioneer is led by an independent 
+academic research group and reviewed by Mozilla. If you enable Pioneer, 
+you will receive periodic invitations to participate in scientific 
+studies.</p>
+        <p id="report-details" data-l10n-id="pioneer-details">Participation in each study is entirely voluntary and opt-in. You can also opt out of a study at any time.</p>
+      </div>
+      <details><summary>What happens next?</summary>
+        <h3>If you agree</h3> to enroll:
+         <ol>
+          <li>An icon will appear on the Firefox toolbar. The icon 
+reminds you that you are a part of Pioneer. You can reach your Pioneer 
+settings at any time by clicking this icon.</li>
+          <li>We’ll change a Firefox preference, too.  This will tell us
+ you are willing to participate in Pioneer studies. Continue using 
+Firefox as you normally would. Pioneer will not actually collect any 
+data until you decide to join a study.</li>
+          <li>Periodically, we will offer you opportunities to join 
+studies.  The purpose of these studies will vary, but might focus on 
+aspects of Firefox or what you experience on the web.</li>
+          <li>Studies will collect different types of information about 
+your online behavior, possibly including what web pages you visit and 
+how you interact with them. Each study will have a privacy notice and 
+information for you explainingabout the data being collected, who will 
+have access to use it, and the study’s purpose.</li>
+          <li>Periodically, we may ask you a yes/no question about what 
+you are currently doing with the browser. As with all of Pioneer, 
+choosing to answer these questions will be entirely optional.</li>
+          </ol>
+        </details>
+      <details><summary>Leaving Pioneer</summary>
+        <p>You are welcome to leave any individual study or the Firefox Pioneer program entirely at any time.</p>
+        To leave the Firefox Pioneer program entirely:
+        <ol>
+          <li>Return to this page by clicking the Pioneer toolbar icon 
+in Firefox or typing about:pioneer into the location bar and pressing 
+Enter.</li>
+          <li>Click the “Leave Pioneer” button above.</li>
+          <li>Opting out of Firefox Pioneer will immediately unenroll 
+you from any in-progress studies that you had already joined. When you 
+leave Pioneer, you will no longer receive offers to join new studies.</li>
+        </ol>
+        <ol>
+          To leave individual studies:
+          <li>Return to this page by clicking the Pioneer toolbar icon 
+in Firefox or typing about:pioneer into the location bar and pressing 
+Enter.</li>
+          <li>All the studies that you have joined will be listed. To leave a specific study, click on the Leave button next to the study.</li>
+          <li>Leaving a study will immediately stop collection of data 
+associated with that study and remove any changes made to the browser as
+ part of the study.</li>
+        </ol>
+        Leaving an individual study will not affect opportunities to join future studies.
+      </details>
+      <details><summary>Your Privacy</summary>
+        <p></p>Mozilla is sensitive to the nature of the data it may 
+collect in some Pioneer studies. We always work hard to keep your data 
+private and secure:<p></p>
+        <ul>
+          <li>We will not attempt to collect cookies, account names, 
+passwords, email addresses, or the data you submit in web forms (POST 
+form values).</li>
+          <li>The data you submit is encrypted in Firefox and not 
+decrypted until it is on a server that is not connected to the wider 
+internet.</li>
+          <li>This data will be linked to a randomly generated ID we 
+only use for Pioneer. It is used to keep a specific user's data together
+ on the server and helps us improve our analysis.  It does not allow us 
+to identify a specific study participant.</li>
+          <li>No data will be collected from inside Private Browsing windows.</li>
+          <li>Proposed studies will be reviewed by a panel consisting of
+ privacy experts, internet researchers and web security engineers to 
+ensure that the data being collected is appropriate and respects 
+participant privacy.</li>
+          <li>Individual level raw data will never be shared publicly or sold.</li>
+          <li>Only a small number of researchers will have access to a 
+study’s raw data. If we share aggregate information from studies, we 
+will disclose it in a way that minimizes the risk of participants being 
+identified.</li>
+        </ul>
+      </details>
+      <h3 id="header-available-studies" data-l10n-id="pioneer-available-studies">Available Studies</h3>
+      <div id="available-studies"><div id="pioneer-v2-example@mozilla.org" class="card card-no-hover" style="opacity: 1;"><img class="card-icon" src="Pioneer_files/2644632-32.png"><div class="card-body"><h2 class="card-name">Demo Study</h2><h3 class="card-creator">Pioneer Developers</h3></div><div class="card-actions"><button id="pioneer-v2-example@mozilla.org-join-button" class="primary join-button" data-l10n-id="pioneer-join-study">Join Study</button><input id="pioneer-v2-example@mozilla.org-toggle-button" class="toggle-button" type="checkbox"></div><div class="card-description"><p>Study purpose: Testing Pioneer.</p><p>Data collected: An encrypted ping containing the current date and time is sent to Mozilla's servers.</p></div></div></div>
+  
+
+</div></body></html>
