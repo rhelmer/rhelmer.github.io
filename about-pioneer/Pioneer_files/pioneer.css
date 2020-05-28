@@ -14,11 +14,8 @@ body {
   }
 }
 
-details {
-  user-select: none;
-}
-
 details > summary {
+  user-select: none;
   padding: 2px 6px;
   width: 15em;
   cursor: pointer;
