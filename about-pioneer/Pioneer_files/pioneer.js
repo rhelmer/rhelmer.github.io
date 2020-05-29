@@ -77,12 +77,12 @@ async function showAvailableStudies(cachedAddons) {
     studyBody.classList.add("card-body");
     study.appendChild(studyBody);
 
-    const studyName = document.createElement("h2");
+    const studyName = document.createElement("h3");
     studyName.setAttribute("class", "card-name");
     studyName.textContent = cachedAddon.name;
     studyBody.appendChild(studyName);
 
-    const studyCreator = document.createElement("h3");
+    const studyCreator = document.createElement("span");
     studyCreator.setAttribute("class", "card-creator");
     studyCreator.textContent = cachedAddon.creator;
     studyBody.appendChild(studyCreator);
@@ -121,17 +121,16 @@ async function showAvailableStudies(cachedAddons) {
       let install;
 
       if (Cu.isInAutomation) {
-        const testAddon = Services.prefs.getStringPref(
-          "toolkit.pioneer.testAddon",
-          null
-        );
-        if (testAddon) {
-          addon = JSON.parse(testAddon);
+        if (
+          Services.prefs.getBoolPref(
+            "toolkit.pioneer.testAddonInstalled",
+            false
+          )
+        ) {
+          addon = { uninstall() {} };
         }
-        class installer {
-          install() {}
-        }
-        install = new installer();
+
+        install = { install() {} };
       } else {
         addon = await AddonManager.getAddonByID(studyAddonId);
         install = await AddonManager.getInstallForURL(
@@ -142,12 +141,13 @@ async function showAvailableStudies(cachedAddons) {
       if (addon) {
         await addon.uninstall();
       } else {
+        joinBtn.disabled = true;
         await install.install();
       }
       updateStudy(studyAddonId);
     }
 
-    enrollStudyBtn.addEventListener("click", toggleEnrolled);
+    enrollStudyBtn.addEventListener("input", toggleEnrolled);
     joinBtn.addEventListener("click", toggleEnrolled);
 
     const availableStudies = document.getElementById("available-studies");
@@ -163,12 +163,11 @@ async function showAvailableStudies(cachedAddons) {
 async function updateStudy(studyAddonId) {
   let addon;
   if (Cu.isInAutomation) {
-    class testAddon {
-      uninstall() {
-        console.debug("uninstall");
-      }
+    if (
+      Services.prefs.getBoolPref("toolkit.pioneer.testAddonInstalled", false)
+    ) {
+      addon = { uninstall() {} };
     }
-    addon = new testAddon();
   } else {
     addon = await AddonManager.getAddonByID(studyAddonId);
   }
@@ -242,11 +241,16 @@ function setup() {
       await showEnrollmentStatus();
     });
 
-  const addonsListener = {};
-  addonsListener.onEnabled = addonsListener.onDisabled = addonsListener.onInstalled = addonsListener.onUninstalled = addon => {
+  const onAddonEvent = addon => {
     if (STUDY_ADDON_WHITELIST.includes(addon.id)) {
       updateStudy(addon.id);
     }
+  };
+  const addonsListener = {
+    onEnabled: onAddonEvent,
+    onDisabled: onAddonEvent,
+    onInstalled: onAddonEvent,
+    onUninstalled: onAddonEvent,
   };
   AddonManager.addAddonListener(addonsListener);
 
