@@ -3,14 +3,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 body {
-  margin-inline-start: 240px;
-  margin-block-start: 70px;
-  max-width: 904px;
+  margin: 70px auto;
+  max-width: 664px;
 }
 
 @media (max-width: 830px) {
   body {
-    margin-inline-start: 0;
+    margin-inline-start: 16px;
   }
 }
 
@@ -26,11 +25,6 @@ details > summary {
   font-size: 1.46em;
   font-weight: 300;
   line-height: 1.3em;
-}
-
-#report-content {
-  max-width: 664px;
-  margin-inline-start: 28px;
 }
 
 #available-studies {
