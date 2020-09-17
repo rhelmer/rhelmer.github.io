@@ -2,20 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-const { AddonManager } = ChromeUtils.import(
-  "resource://gre/modules/AddonManager.jsm"
-);
-
-const { RemoteSettings } = ChromeUtils.import(
-  "resource://services-settings/remote-settings.js"
-);
-
-const { TelemetryController } = ChromeUtils.import(
-  "resource://gre/modules/TelemetryController.jsm"
-);
-
-const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
-
 const PREF_PIONEER_ID = "toolkit.telemetry.pioneerId";
 const PREF_PIONEER_NEW_STUDIES_AVAILABLE =
   "toolkit.telemetry.pioneer-new-studies-available";
@@ -42,65 +28,14 @@ function showEnrollmentStatus() {
 
   const enrollmentButton = document.getElementById("enrollment-button");
 
-  document.l10n.setAttributes(
-    enrollmentButton,
-    `pioneer-${pioneerId ? "un" : ""}enrollment-button`
-  );
+  //document.l10n.setAttributes(
+  //  enrollmentButton,
+  //  `pioneer-${pioneerId ? "un" : ""}enrollment-button`
+  //);
   enrollmentButton.classList.toggle("primary", !pioneerId);
 }
 
-function toggleContentBasedOnLocale() {
-  const requestedLocale = Services.locale.requestedLocale;
-  if (requestedLocale !== "en-US") {
-    const localeNotificationBar = document.getElementById(
-      "locale-notification"
-    );
-    localeNotificationBar.style.display = "block";
-
-    const reportContent = document.getElementById("report-content");
-    reportContent.style.display = "none";
-  }
-}
-
 async function toggleEnrolled(studyAddonId, cachedAddons) {
-  let addon;
-  let install;
-
-  const cachedAddon = cachedAddons.find(a => a.addon_id == studyAddonId);
-
-  if (Cu.isInAutomation) {
-    install = {
-      install: async () => {
-        let testAddons = Services.prefs.getStringPref(PREF_TEST_ADDONS, "[]");
-        testAddons = JSON.parse(testAddons);
-
-        testAddons.push(studyAddonId);
-        Services.prefs.setStringPref(
-          PREF_TEST_ADDONS,
-          JSON.stringify(testAddons)
-        );
-      },
-    };
-
-    let testAddons = Services.prefs.getStringPref(PREF_TEST_ADDONS, "[]");
-    testAddons = JSON.parse(testAddons);
-
-    for (const testAddon of testAddons) {
-      if (testAddon == studyAddonId) {
-        addon = {};
-        addon.uninstall = () => {
-          Services.prefs.setStringPref(
-            PREF_TEST_ADDONS,
-            JSON.stringify(testAddons.filter(a => a.id != testAddon.id))
-          );
-        };
-      }
-    }
-  } else {
-    addon = await AddonManager.getAddonByID(studyAddonId);
-    install = await AddonManager.getInstallForURL(cachedAddon.sourceURI.spec);
-  }
-
   const completedStudies = Services.prefs.getStringPref(
     PREF_PIONEER_COMPLETED_STUDIES,
     "{}"
@@ -114,7 +49,7 @@ async function toggleEnrolled(studyAddonId, cachedAddons) {
     await addon.uninstall();
     await sendDeletionPing(studyAddonId);
 
-    document.l10n.setAttributes(joinBtn, "pioneer-join-study");
+    // document.l10n.setAttributes(joinBtn, "pioneer-join-study");
     joinBtn.disabled = false;
 
     // Record that the user abandoned this study, since it may not be re-join-able.
@@ -142,7 +77,7 @@ async function toggleEnrolled(studyAddonId, cachedAddons) {
     }
     joinBtn.disabled = true;
     await install.install();
-    document.l10n.setAttributes(joinBtn, "pioneer-leave-study");
+    // document.l10n.setAttributes(joinBtn, "pioneer-leave-study");
     joinBtn.disabled = false;
 
     // Send an enrollment ping for this study. Note that this could be sent again
@@ -154,7 +89,8 @@ async function toggleEnrolled(studyAddonId, cachedAddons) {
 }
 
 async function showAvailableStudies(cachedAddons) {
-  const pioneerId = Services.prefs.getStringPref(PREF_PIONEER_ID, null);
+  // const pioneerId = Services.prefs.getStringPref(PREF_PIONEER_ID, null);
+  const pioneerId = "abc123";
   const defaultAddons = cachedAddons.filter(a => a.isDefault);
   if (pioneerId) {
     for (const defaultAddon of defaultAddons) {
@@ -230,7 +166,7 @@ async function showAvailableStudies(cachedAddons) {
     joinBtn.setAttribute("id", `${studyAddonId}-join-button`);
     joinBtn.classList.add("primary");
     joinBtn.classList.add("join-button");
-    document.l10n.setAttributes(joinBtn, "pioneer-join-study");
+    // document.l10n.setAttributes(joinBtn, "pioneer-join-study");
 
     joinBtn.addEventListener("click", async () => {
       let addon;
@@ -319,7 +255,7 @@ async function showAvailableStudies(cachedAddons) {
   }
 
   const availableStudies = document.getElementById("header-available-studies");
-  document.l10n.setAttributes(availableStudies, "pioneer-current-studies");
+  // document.l10n.setAttributes(availableStudies, "pioneer-current-studies");
 }
 
 async function updateStudy(studyAddonId) {
@@ -352,7 +288,7 @@ async function updateStudy(studyAddonId) {
   if (studyAddonId in studies) {
     study.style.opacity = 0.5;
     joinBtn.disabled = true;
-    document.l10n.setAttributes(joinBtn, "pioneer-ended-study");
+    // document.l10n.setAttributes(joinBtn, "pioneer-ended-study");
     return;
   }
 
@@ -361,12 +297,12 @@ async function updateStudy(studyAddonId) {
     joinBtn.disabled = false;
 
     if (addon) {
-      document.l10n.setAttributes(joinBtn, "pioneer-leave-study");
+      // document.l10n.setAttributes(joinBtn, "pioneer-leave-study");
     } else {
-      document.l10n.setAttributes(joinBtn, "pioneer-join-study");
+      // document.l10n.setAttributes(joinBtn, "pioneer-join-study");
     }
   } else {
-    document.l10n.setAttributes(joinBtn, "pioneer-study-prompt");
+    // document.l10n.setAttributes(joinBtn, "pioneer-study-prompt");
     study.style.opacity = 0.5;
     joinBtn.disabled = true;
   }
@@ -386,7 +322,8 @@ async function setup(cachedAddons) {
   document
     .getElementById("enrollment-button")
     .addEventListener("click", async () => {
-      const pioneerId = Services.prefs.getStringPref(PREF_PIONEER_ID, null);
+      // const pioneerId = Services.prefs.getStringPref(PREF_PIONEER_ID, null);
+      const pioneerId = null;
 
       if (pioneerId) {
         let dialog = document.getElementById("leave-pioneer-consent-dialog");
@@ -423,7 +360,8 @@ async function setup(cachedAddons) {
   document
     .getElementById("join-pioneer-accept-dialog-button")
     .addEventListener("click", async event => {
-      const pioneerId = Services.prefs.getStringPref(PREF_PIONEER_ID, null);
+      //const pioneerId = Services.prefs.getStringPref(PREF_PIONEER_ID, null);
+      const pioneerId = "abc123";
 
       if (!pioneerId) {
         let uuid = generateUUID();
@@ -458,10 +396,10 @@ async function setup(cachedAddons) {
               const availableStudies = document.getElementById(
                 "available-studies"
               );
-              document.l10n.setAttributes(
-                availableStudies,
-                "pioneer-no-current-studies"
-              );
+              //document.l10n.setAttributes(
+              //  availableStudies,
+              //  "pioneer-no-current-studies"
+              //);
             }
           }
           const study = document.getElementById(cachedAddon.addon_id);
@@ -475,16 +413,17 @@ async function setup(cachedAddons) {
       // the enrollment ping.
       await sendEnrollmentPing();
 
-      showEnrollmentStatus();
+      // showEnrollmentStatus();
     });
 
   document
     .getElementById("leave-pioneer-accept-dialog-button")
     .addEventListener("click", async event => {
-      const completedStudies = Services.prefs.getStringPref(
-        PREF_PIONEER_COMPLETED_STUDIES,
-        "{}"
-      );
+//      const completedStudies = Services.prefs.getStringPref(
+//        PREF_PIONEER_COMPLETED_STUDIES,
+//        "{}"
+//      );
+      const completedStudies = {};
       const studies = JSON.parse(completedStudies);
 
       // Send a deletion ping for all completed studies the user has been a part of.
@@ -541,7 +480,7 @@ async function setup(cachedAddons) {
       }
 
       document.getElementById("leave-pioneer-consent-dialog").close();
-      showEnrollmentStatus();
+      // showEnrollmentStatus();
     });
 
   document
@@ -559,37 +498,6 @@ async function setup(cachedAddons) {
       const studyAddonId = dialog.getAttribute("addon-id");
       await toggleEnrolled(studyAddonId, cachedAddons).then(dialog.close());
     });
-
-  const onAddonEvent = async addon => {
-    for (const cachedAddon in cachedAddons) {
-      if (cachedAddon.addon_id == addon.id) {
-        await updateStudy(addon.id);
-      }
-    }
-  };
-
-  const addonsListener = {
-    onEnabled: onAddonEvent,
-    onDisabled: onAddonEvent,
-    onInstalled: onAddonEvent,
-    onUninstalled: onAddonEvent,
-  };
-  AddonManager.addAddonListener(addonsListener);
-
-  window.addEventListener("unload", event => {
-    AddonManager.removeAddonListener(addonsListener);
-  });
-}
-
-function removeBadge() {
-  Services.prefs.setBoolPref(PREF_PIONEER_NEW_STUDIES_AVAILABLE, false);
-
-  for (let win of Services.wm.getEnumerator("navigator:browser")) {
-    const badge = win.document
-      .getElementById("pioneer-button")
-      .querySelector(".toolbarbutton-badge");
-    badge.classList.remove("feature-callout");
-  }
 }
 
 // Updates Pioneer HTML page contents from RemoteSettings.
@@ -635,45 +543,29 @@ function updateContents(contents) {
 }
 
 document.addEventListener("DOMContentLoaded", async domEvent => {
-  toggleContentBasedOnLocale();
 
-  showEnrollmentStatus();
+  // showEnrollmentStatus();
 
-  document.addEventListener("focus", removeBadge);
-  removeBadge();
+  // document.addEventListener("focus", removeBadge);
+  // removeBadge();
 
   const privacyPolicyLinks = document.querySelectorAll(
     ".privacy-policy,.privacy-notice"
   );
+  /*
   for (const privacyPolicyLink of privacyPolicyLinks) {
     const privacyPolicyFormattedLink = Services.urlFormatter.formatURL(
       privacyPolicyLink.href
     );
     privacyPolicyLink.href = privacyPolicyFormattedLink;
   }
+  */
 
-  let cachedContent;
-  let cachedAddons;
-  if (Cu.isInAutomation) {
-    let testCachedAddons = Services.prefs.getStringPref(
-      PREF_TEST_CACHED_ADDONS,
-      null
-    );
-    if (testCachedAddons) {
-      cachedAddons = JSON.parse(testCachedAddons);
-    }
+  const cachedContent = [];
+  const cachedAddons = [];
 
-    let testCachedContent = Services.prefs.getStringPref(
-      PREF_TEST_CACHED_CONTENT,
-      null
-    );
-    if (testCachedContent) {
-      cachedContent = JSON.parse(testCachedContent);
-    }
-  } else {
-    cachedContent = await RemoteSettings(CONTENT_COLLECTION_KEY).get();
-    cachedAddons = await RemoteSettings(STUDY_ADDON_COLLECTION_KEY).get();
-  }
+  // const cachedContent = await RemoteSettings(CONTENT_COLLECTION_KEY).get();
+  // const cachedAddons = await RemoteSettings(STUDY_ADDON_COLLECTION_KEY).get();
 
   // Replace existing contents immediately on page load.
   for (const contents of cachedContent) {
@@ -782,5 +674,5 @@ async function sendEnrollmentPing(studyAddonId) {
     options.schemaNamespace = studyAddonId;
   }
 
-  await TelemetryController.submitExternalPing("pioneer-study", {}, options);
+  //await TelemetryController.submitExternalPing("pioneer-study", {}, options);
 }
