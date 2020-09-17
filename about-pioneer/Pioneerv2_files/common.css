@@ -5,7 +5,7 @@
 @namespace html "http://www.w3.org/1999/xhtml";
 @namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
-*|*:root {
+:root {
   --in-content-page-color: #0c0c0d;
   --in-content-page-background: #f9f9fa;
   --in-content-text-color: var(--grey-90);
@@ -146,7 +146,7 @@
 
 :root {
   font: message-box;
-  -moz-appearance: none;
+  appearance: none;
   background-color: var(--in-content-page-background);
   color: var(--in-content-page-color);
 }
@@ -176,7 +176,7 @@ html|h2 {
   line-height: 1.4em;
 }
 
-*|*.main-content {
+.main-content {
   padding: 40px 28px;
   overflow: auto;
 }
@@ -184,7 +184,7 @@ html|h2 {
 /* tabpanels and tabs */
 
 xul|tabpanels {
-  -moz-appearance: none;
+  appearance: none;
   border: none;
   padding: 0;
   background-color: transparent;
@@ -199,7 +199,7 @@ xul|tabs {
 }
 
 xul|tab {
-  -moz-appearance: none;
+  appearance: none;
   margin-top: 0;
   padding: 4px 20px 0 !important;
   min-height: 44px;
@@ -227,11 +227,11 @@ html|button {
 
 /* xul buttons and menulists */
 
-*|button,
+button,
 html|select,
 html|input[type="color"],
 xul|menulist {
-  -moz-appearance: none;
+  appearance: none;
   min-height: 32px;
   /* !important overrides button.css for disabled and default XUL buttons: */
   color: inherit !important;
@@ -258,7 +258,7 @@ html|input[type="color"]::-moz-focus-inner {
   border: none;
 }
 
-*|button:-moz-focusring,
+button:-moz-focusring,
 html|select:-moz-focusring,
 html|input[type="checkbox"]:-moz-focusring,
 html|input[type="color"]:-moz-focusring,
@@ -322,7 +322,7 @@ xul|menulist[disabled="true"] {
 
 html|button[autofocus],
 html|button[type="submit"],
-*|button.primary {
+button.primary {
   background-color: var(--in-content-primary-button-background);
   color: var(--in-content-selected-text) !important;
 }
@@ -381,7 +381,7 @@ xul|*.close-icon > xul|*.button-box {
 }
 
 xul|menulist::part(dropmarker) {
-  -moz-appearance: none;
+  appearance: none;
   margin-inline-end: 4px;
   padding: 0;
   border: none;
@@ -397,7 +397,7 @@ xul|menulist::part(dropmarker-icon) {
 }
 
 xul|menulist > xul|menupopup {
-  -moz-appearance: none;
+  appearance: none;
   border: 1px solid var(--in-content-box-border-color);
   border-radius: 2px;
   background-color: var(--in-content-box-background);
@@ -405,7 +405,7 @@ xul|menulist > xul|menupopup {
 
 xul|menulist > xul|menupopup xul|menu,
 xul|menulist > xul|menupopup xul|menuitem {
-  -moz-appearance: none;
+  appearance: none;
   font-size: 1em;
   color: var(--in-content-text-color);
   padding-block: 0.2em;
@@ -433,7 +433,7 @@ xul|menulist > xul|menupopup > xul|menuitem[disabled="true"] {
 }
 
 xul|menulist > xul|menupopup xul|menuseparator {
-  -moz-appearance: none;
+  appearance: none;
   margin: 0;
   padding: 0;
   border-top: 1px solid var(--in-content-box-border-color);
@@ -450,7 +450,7 @@ html|input[type="url"],
 html|input[type="number"],
 html|textarea,
 xul|search-textbox {
-  -moz-appearance: none;
+  appearance: none;
   border: 1px solid var(--in-content-box-border-color);
   border-radius: 2px;
   color: inherit;
@@ -558,14 +558,14 @@ html|a:hover:active,
 /* Checkboxes and radio buttons */
 
 xul|checkbox {
-  -moz-appearance: none;
+  appearance: none;
   height: 30px;
   margin: 2px 0;
 }
 
 xul|*.checkbox-check,
 html|input[type="checkbox"] {
-  -moz-appearance: none;
+  appearance: none;
   width: 20px;
   height: 20px;
   padding: 1px;
@@ -617,11 +617,11 @@ html|*.toggle-container-with-text {
 
 xul|radio {
   margin-inline-start: 0;
-  -moz-appearance: none;
+  appearance: none;
 }
 
 xul|*.radio-check {
-  -moz-appearance: none;
+  appearance: none;
   width: 20px;
   height: 20px;
   border: 1px solid var(--in-content-box-border-color);
@@ -653,8 +653,8 @@ xul|*.radio-label-box {
 
 /* Category List */
 
-*|*#categories {
-  -moz-appearance: none;
+#categories {
+  appearance: none;
   background-color: initial; /* override the background-color set on all richlistboxes in common.inc.css */
   margin: 70px 0 0;
   border-width: 0;
@@ -667,9 +667,9 @@ html|*#categories {
   padding: 1px;
 }
 
-*|*#categories > *|*.category {
+#categories > .category {
   min-height: 48px;
-  -moz-appearance: none;
+  appearance: none;
   margin-inline-start: 34px;
   padding-inline: 10px;
   transition: background-color 150ms;
@@ -694,33 +694,33 @@ html|*#categories > html|*.category:dir(rtl) {
   background-position-x: right 10px;
 }
 
-*|*#categories > *|*.category:hover {
+#categories > .category:hover {
   background-color: var(--in-content-category-background-hover);
   border-radius: 2px;
 }
 
-*|*#categories > *|*.category:hover:active {
+#categories > .category:hover:active {
   background-color: var(--in-content-category-background-active);
 }
 
-*|*#categories > *|*.category[selected],
-*|*#categories > *|*.category.selected {
+#categories > .category[selected],
+#categories > .category.selected {
   color: var(--in-content-category-text-selected) !important;
   background-color: transparent;
 }
 
-*|*#categories > *|*.category[selected]:hover,
-*|*#categories > *|*.category.selected:hover {
+#categories > .category[selected]:hover,
+#categories > .category.selected:hover {
   background-color: var(--in-content-category-background-selected-hover);
 }
 
-*|*#categories > *|*.category[selected]:hover:active,
-*|*#categories > *|*.category.selected:hover:active {
+#categories > .category[selected]:hover:active,
+#categories > .category.selected:hover:active {
   color: var(--in-content-category-text-selected-active) !important;
   background-color: var(--in-content-category-background-selected-active);
 }
 
-*|*#categories[keyboard-navigation="true"]:-moz-focusring > *|*.category[current] {
+#categories[keyboard-navigation="true"]:-moz-focusring > .category[current] {
   outline: var(--in-content-category-outline-focus);
 }
 
@@ -729,23 +729,23 @@ html|*#categories[last-input-type="mouse"] > html|button.category:-moz-focusring
   box-shadow: none;
 }
 
-*|*.category-name {
+.category-name {
   font-size: 1.07em;
   line-height: 1.4em;
   padding-inline-start: 9px;
   margin: 0;
-  -moz-user-select: none;
+  user-select: none;
 }
 
-*|*.category-icon {
+.category-icon {
   width: 24px;
   height: 24px;
   -moz-context-properties: fill, fill-opacity;
   fill: currentColor;
 }
 
-*|*.category[selected] > *|*.category-icon,
-*|*.category.selected > *|*.category-icon {
+.category[selected] > .category-icon,
+.category.selected > .category-icon {
   fill-opacity: 1;
 }
 
@@ -787,19 +787,19 @@ html|*#categories[last-input-type="mouse"] > html|button.category:-moz-focusring
 
 /* header */
 
-*|*.header {
+.header {
   margin-inline-end: 4px; /* add the 4px end-margin of other elements */
   margin-bottom: 15px;
   padding-bottom: 15px;
   -moz-box-align: baseline;
 }
 
-*|*.header-name {
+.header-name {
   font-size: 1.46em;
   font-weight: 300;
   line-height: 1.3em;
   margin: 0;
-  -moz-user-select: none;
+  user-select: none;
 }
 
 /* List boxes */
@@ -807,7 +807,7 @@ html|*#categories[last-input-type="mouse"] > html|button.category:-moz-focusring
 html|select[size][multiple],
 xul|listheader,
 xul|richlistbox {
-  -moz-appearance: none;
+  appearance: none;
   margin-inline: 0;
   background-color: var(--in-content-box-background);
   border: 1px solid var(--in-content-box-border-color);
@@ -861,7 +861,7 @@ xul|panel[type="autocomplete-richlistbox"] {
 /* Trees */
 
 xul|tree {
-  -moz-appearance: none;
+  appearance: none;
   font-size: 1em;
   border: 1px solid var(--in-content-box-border-color);
   border-radius: 2px;
@@ -877,7 +877,7 @@ xul|richlistbox:-moz-focusring {
 }
 
 xul|treecols {
-  -moz-appearance: none;
+  appearance: none;
   border: none;
   border-bottom: 1px solid var(--in-content-border-color);
   padding: 0;
@@ -885,7 +885,7 @@ xul|treecols {
 
 xul|treecol:not([hideheader="true"]),
 xul|treecolpicker {
-  -moz-appearance: none;
+  appearance: none;
   border: none;
   background-color: var(--in-content-box-background-hover);
   color: #808080;
@@ -1125,7 +1125,7 @@ html|*.help-icon {
 .sidebar-footer-label {
   margin: 0 4px;
   font-size: .9em;
-  -moz-user-select: none;
+  user-select: none;
 }
 
 @media (max-width: 830px) {
@@ -1194,7 +1194,7 @@ xul|tab[visuallyselected] {
 }
 
 xul|button[dlgtype="help"] {
-  -moz-appearance: none;
+  appearance: none;
   width: auto;
 }
 
@@ -1242,7 +1242,7 @@ xul|radio[focused="true"] > .radio-check {
 }
 
 xul|search-textbox {
-  -moz-appearance: none;
+  appearance: none;
   padding-inline: 8px;
 }
 
