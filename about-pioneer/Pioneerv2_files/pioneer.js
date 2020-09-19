@@ -532,124 +532,42 @@ document.addEventListener("DOMContentLoaded", async (domEvent) => {
   // console.debug("fetch result:", result);
   cachedAddons = [
     {
-      addon_id: "pioneer-v2-example@mozilla.org",
-      icons: {
-        32: "https://localhost/user-media/addon_icons/2644/2644632-32.png?modified=4a64e2bc",
-        64: "https://localhost/user-media/addon_icons/2644/2644632-64.png?modified=4a64e2bc",
-        128: "https://localhost/user-media/addon_icons/2644/2644632-128.png?modified=4a64e2bc",
-      },
       name: "Demo Study",
-      version: "1.0",
-      sourceURI: {
-        spec: "https://localhost",
+      icons: {
+        32: "https://addons.cdn.mozilla.net/user-media/addon_icons/2644/2644632-32.png?modified=4a64e2bc",
+        64: "https://addons.cdn.mozilla.net/user-media/addon_icons/2644/2644632-64.png?modified=4a64e2bc",
+        128: "https://addons.cdn.mozilla.net/user-media/addon_icons/2644/2644632-128.png?modified=4a64e2bc",
       },
-      description: "Study purpose: Testing Pioneer.",
-      privacyPolicy: {
-        spec: "http://localhost",
-      },
-      studyType: "extension",
+      schema: 1597266497978,
       authors: {
+        url:
+          "https://addons.mozilla.org/en-US/firefox/addon/pioneer-v2-example/",
         name: "Pioneer Developers",
-        url: "https://addons.mozilla.org/en-US/firefox/user/6510522/",
       },
-      dataCollectionDetails: ["test123", "test345"],
+      version: "1.0",
+      addon_id: "pioneer-v2-example@mozilla.org",
       moreInfo: {
-        spec: "http://localhost",
+        spec:
+          "https://addons.mozilla.org/en-US/firefox/addon/pioneer-v2-example/",
       },
       isDefault: false,
-      studyEnded: true,
-      joinStudyConsent: "test123",
-      leaveStudyConsent: "test345",
-    },
-    {
-      addon_id: "pioneer-v2-default-example@mozilla.org",
-      icons: {
-        32: "https://localhost/user-media/addon_icons/2644/2644632-32.png?modified=4a64e2bc",
-        64: "https://localhost/user-media/addon_icons/2644/2644632-64.png?modified=4a64e2bc",
-        128: "https://localhost/user-media/addon_icons/2644/2644632-128.png?modified=4a64e2bc",
-      },
-      name: "Demo Default Study",
-      version: "1.0",
       sourceURI: {
-        spec: "https://localhost",
-      },
-      description: "Study purpose: Testing Pioneer.",
-      privacyPolicy: {
-        spec: "http://localhost",
+        spec:
+          "https://addons.mozilla.org/firefox/downloads/file/3579857/pioneer_v2-1.0-fx.xpi",
       },
       studyType: "extension",
-      authors: {
-        name: "Pioneer Developers",
-        url: "https://addons.mozilla.org/en-US/firefox/user/6510522/",
-      },
-      dataCollectionDetails: ["test123", "test345"],
-      moreInfo: {
-        spec: "http://localhost",
-      },
-      isDefault: true,
       studyEnded: false,
-      joinStudyConsent: "test456",
-      leaveStudyConsent: "test789",
-    },
-    {
-      addon_id: "study@partner",
-      icons: {
-        32: "https://localhost/user-media/addon_icons/2644/2644632-32.png?modified=4a64e2bc",
-        64: "https://localhost/user-media/addon_icons/2644/2644632-64.png?modified=4a64e2bc",
-        128: "https://localhost/user-media/addon_icons/2644/2644632-128.png?modified=4a64e2bc",
-      },
-      name: "Example Partner Study",
-      version: "1.0",
-      sourceURI: {
-        spec: "https://localhost",
-      },
       description: "Study purpose: Testing Pioneer.",
       privacyPolicy: {
-        spec: "http://localhost",
+        spec:
+          "https://addons.mozilla.org/en-US/firefox/addon/pioneer-v2-example/",
       },
-      studyType: "extension",
-      authors: {
-        name: "Study Partners",
-        url: "http://localhost",
-      },
-      dataCollectionDetails: ["test123", "test345"],
-      moreInfo: {
-        spec: "http://localhost",
-      },
-      isDefault: false,
-      studyEnded: false,
-      joinStudyConsent: "test012",
-      leaveStudyConsent: "test345",
-    },
-    {
-      addon_id: "second-study@partner",
-      icons: {
-        32: "https://localhost/user-media/addon_icons/2644/2644632-32.png?modified=4a64e2bc",
-        64: "https://localhost/user-media/addon_icons/2644/2644632-64.png?modified=4a64e2bc",
-        128: "https://localhost/user-media/addon_icons/2644/2644632-128.png?modified=4a64e2bc",
-      },
-      name: "Example Second Partner Study",
-      version: "1.0",
-      sourceURI: {
-        spec: "https://localhost",
-      },
-      description: "Study purpose: Testing Pioneer.",
-      privacyPolicy: {
-        spec: "http://localhost",
-      },
-      studyType: "extension",
-      authors: {
-        name: "Second Study Partners",
-        url: "https://localhost",
-      },
-      dataCollectionDetails: ["test123", "test345"],
-      moreInfo: {
-        spec: "http://localhost",
-      },
-      isDefault: false,
-      studyEnded: false,
-      joinStudyConsent: "test678",
-      leaveStudyConsent: "test901",
+      joinStudyConsent:
+        "This study will send an encrypted ping, only when the toolbar icon is clicked.",
+      leaveStudyConsent: "This study cannot be re-joined.",
+      dataCollectionDetails: ["The date and time"],
+      id: "0eb02750-7159-4f09-96ae-5c7cb7424e89",
+      last_modified: 1597280277565,
     },
   ];
 
